@@ -1,0 +1,103 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [{name = "Yuanshao Yang", email = "yyang3051@gatech.edu"}]
+name = "ume"
+requires-python = ">= 3.12"
+version = "0.1.0"
+
+[tool.setuptools]
+package-dir = { "ume" = "." }
+packages = ["ume"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+
+[tool.pixi.tasks]
+
+[tool.pixi.feature.redis]
+platforms = ["linux-64"]
+channels = ["conda-forge"]
+
+[tool.pixi.feature.redis.target.linux-64.dependencies]
+python = "3.12.*"
+pip = "25.1.*"
+numpy = "1.26.*"
+scipy = "1.15.*"
+py-opencv = "4.11.*"
+redis-server = "7.4.0.*"
+redis-py = "5.3.0.*"
+hiredis = "3.1.0.*"
+python-can = "4.2.*"
+setuptools = "80.9.0.*"
+pinocchio = "3.4.*"
+ipykernel = "*"
+process-compose = "*"
+av = "*"
+cmake = "3.26.*"
+pybind11 = "2.12.*"
+pyserial = "*"
+compilers = "*"
+gcc_linux-64 = "*"
+gxx_linux-64 = "*"
+pynput = "*"
+
+[tool.pixi.feature.redis.target.linux-64.pypi-dependencies]
+canopen = "==2.4.1"
+typing-extensions = "*"
+threadpoolctl = "==3.6.0"
+mink = "==0.0.6"
+osqp = "==0.6.7"
+mujoco = "==3.2.7"
+dm-control = "==1.0.20"
+loop-rate-limiters = ">=1.0.0"
+ruckig = "*"
+more-itertools = "*"
+typer = "==0.15"
+transforms3d = "*"
+pyyaml = "*"
+inputs = "*"
+
+[tool.pixi.feature.torch]
+platforms = ["win-64", "linux-64"]
+channels = ["conda-forge"]
+
+[tool.pixi.feature.torch.dependencies]
+python = "3.12.*"
+pip = "25.1.*"
+ipykernel = "*"
+numpy = "1.26.*"
+scipy = "1.15.*"
+py-opencv = "4.11.*"
+av = "*"
+redis-py = "5.3.0.*"
+hiredis = "3.1.0.*"
+pytorch = "*"
+torchvision = "*"
+
+
+[tool.pixi.feature.torch.pypi-dependencies]
+tqdm = "*"
+matplotlib = "*"
+pyyaml = "*"
+typer = "==0.15"
+wandb = "*"
+
+[tool.pixi.feature.torch.target.linux-64.dependencies]
+redis-server = "7.4.0.*"   # no Windows build on conda-forge
+pinocchio = "3.4.*"
+
+[tool.pixi.feature.torch.target.win-64.dependencies]
+pinocchio = "3.2.*"
+
+[tool.pixi.environments]
+redis = { features = ["redis"]}
+torch = { features = ["torch"]}
+
+[tool.pixi.dependencies]
+python = "3.12.*"
+[tool.pixi.pypi-dependencies]
+ume = { path = ".", editable = true }   # replaces the generated ume_exo / ume-exo entry
